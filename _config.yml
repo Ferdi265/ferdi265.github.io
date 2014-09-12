@@ -3,14 +3,14 @@ title: ferdi265.blog();
 email: theferdi265@gmail.com
 description: >
   npm link ferdi265-dev-blog
-baseurl: "" # the subpath of your site, e.g. /blog/
-url: "http://ferdi265.github.io" # the base hostname & protocol for your site
+baseurl: ""
+url: "http://ferdi265.github.io"
 twitter_username: theFerdi265
 github_username:  Ferdi265
 
 # Build settings
 markdown: kramdown
 
-# kramdown settings
+# Kramdown settings
 kramdown:
   input: GFM

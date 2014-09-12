@@ -5,12 +5,12 @@ date:   2014-09-12 15:14:37
 categories: generic
 ---
 
-{% highlight js %}
+```js
 var server = require('http').createServer(function (req, res) {
 	res.end('Hello World!');
 });
 server.listen(80);
-{% endhighlight %}
+```
 
 Hello blog readers (probably only me, but whatever)!
 

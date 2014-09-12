@@ -3,6 +3,8 @@ title: ferdi265.blog();
 email: theferdi265@gmail.com
 description: >
   npm link ferdi265-dev-blog
+
+  This is my (Ferdinand "Ferdi265" Bachmann) DevBlog where I post about my recent programming projects.
 baseurl: ""
 url: "http://ferdi265.github.io"
 twitter_username: theFerdi265

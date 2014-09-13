@@ -29,14 +29,20 @@ For now I'll add a test connection box on the bottom of this post (to see if it 
 	<script src="https://cdn.socket.io/socket.io-1.1.0.js"></script>
 	<script>
 		$(function () {
-			$('.connect-submit').click(function () {
+			$('.connect-submit').one('click', function () {
 				var socket = io.connect($('.connect-box').val());
+				$('.sio-container').html('Connecting...');
 				socket.on('established', function () {
 					socket.emit('version');
+					$('.sio-container').html('Connection established. Getting version...');
 				});
 				socket.on('version', function (ver) {
 					socket.disconnect();
 					$('.sio-container').html('Server detected. Running version ' + ver);
+				});
+				socket.on('connect_error', function () {
+					socket.disconnect();
+					$('.sio-container').html('Connection error.');
 				});
 			});
 		})

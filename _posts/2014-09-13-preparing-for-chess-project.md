@@ -19,8 +19,9 @@ The system will work like this:
 
 4. Profit!
 
-For now I'll add a test connection box on the bottom of this post (to see if it really works).
 The goal is to embed a JavaScript file that communicates with a chess server (will probably only be mine) via socket.io and displays a nice HTML5 UI.
+
+For now I'll add a test connection box on the bottom of this post (to see if it really works).
 
 <div class="sio-container">
 	Server adress: <input type="text" class="connect-box"><input type="button" class="connect-submit" value="Connect">

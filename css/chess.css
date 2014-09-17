@@ -1,0 +1,25 @@
+.ch-container table {
+	border: 1px solid black;
+}
+.ch-container tr:last-child {
+	background-color: #eee;
+}
+.ch-container td:first-child {
+	background-color: #eee;
+}
+.ch-container td {
+	border: 1px solid black;
+	font-size: 2em;
+	width: 1.25em;
+	height: 1.25em;
+	text-align: center;
+}
+.ch-container .selected {
+	background-color: #777;
+}
+.ch-container .moveable {
+	background-color: #aaa;
+}
+.ch-container .error {
+	background-color: #a00;
+}

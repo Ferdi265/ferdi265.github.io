@@ -70,7 +70,7 @@ var	//Functions
 			var boardCopy,
 				moves,
 				self = this;
-			if (!this.board.valid || this.board[this.from.file][this.from.rank].player !== this.board.toMove) {
+			if (!this.board.valid || this.board[this.from.file][this.from.rank].player !== this.board.toMove || board.outcome) {
 				return false;
 			}
 			moves = this.board[this.from.file][this.from.rank].moves();

@@ -232,8 +232,8 @@ var	//Functions
 					var target = self[move.to.file][move.to.rank];
 					return target && target.type === 'k' && target.player !== piece.player;
 				})) {
-					if (!check.contains(piece.player)) {
-						check += piece.player;
+					if (!check.contains(Player.enemy(piece.player))) {
+						check += Player.enemy(piece.player);
 					}
 					return check.contains('w') && check.contains('b');
 				}

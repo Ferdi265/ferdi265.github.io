@@ -57,7 +57,7 @@ var transpose = function (rows) {
 				$('.ch-container').append('<div><span>Stalemate</span></div>');
 			}
 		} else {
-			$('.ch-container').append('<div><span>Check: </span>' + (board.check === '' ? 'No' : board.check === 'wb' ? 'Both (invalid)' : board.check === 'w' ? 'White' : 'Black') + '</div>');
+			$('.ch-container').append('<div><span>' + (board.check === '' ? 'Noone is ' : board.check === 'wb' ? 'Both (invalid) are ' : board.check === 'w' ? 'White is ' : 'Black is ') + 'in Check</span></div>');
 		}
 		if (board.outcome) {
 			$('.ch-container').append('<div><span>Outcome: </span>' + (board.outcome === 'wb' ? 'Draw' : board.outcome === 'w' ? 'White wins' : 'Black wins') + '</div>');

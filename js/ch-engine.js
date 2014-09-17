@@ -233,7 +233,7 @@ var	//Functions
 					return target && target.type === 'k' && target.player !== piece.player;
 				})) {
 					if (!check.contains(piece.player)) {
-						check += Player.enemy(piece.player);
+						check += piece.player;
 					}
 					return check.contains('w') && check.contains('b');
 				}
@@ -258,10 +258,10 @@ var	//Functions
 			return this;
 		},
 		updateValid: function () {
-			if(!this.check.contains(Player.enemy(this.toMove))) {
-				this.valid = true;
-			} else {
+			if(this.check.contains(Player.enemy(this.toMove))) {
 				this.valid = false;
+			} else {
+				this.valid = true;
 			}
 			return this;
 		},

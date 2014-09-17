@@ -849,7 +849,7 @@ var	//Functions
 				init: function (board, from, to, meta) {
 					this.board = board;
 					this.meta = meta || 'q';
-					Move.init.call(this, from, to);
+					Move.init.call(this, board, from, to);
 					return this;
 				},
 				valid: function () {

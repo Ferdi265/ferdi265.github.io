@@ -80,8 +80,7 @@ var	//Functions
 				return false;
 			}
 			boardCopy = this.board.copy();
-			boardCopy.history.boards.push(boardCopy.toHistory());
-			boardCopy.history.moves.push(this);
+			boardCopy.pastMoves.push(this);
 			boardCopy.halfmoves++;
 			this.apply(boardCopy);
 			boardCopy.toMove = Player.enemy(boardCopy.toMove);
@@ -128,16 +127,13 @@ var	//Functions
 			return this;
 		},
 		execute: function () {
-			var copy = this.board.copy();
-			this.board.history.boards.push(this.board.toHistory());
-			this.board.history.moves.push(this);
+			this.board.pastMoves.push(this.copy(this.board.copy()));
 			this.board.halfmoves++;
 			this.apply(this.board);
 			this.board.toMove = Player.enemy(this.board.toMove);
 			this.board.updateCheck();
 			this.board.updateMate();
 			this.board.recursiveValid();
-			this.board = copy;
 			return this;
 		},
 		longAlgebraic: function () {
@@ -258,18 +254,18 @@ var	//Functions
 			return this;
 		},
 		updateValid: function () {
-			if(this.check.contains(Player.enemy(this.toMove))) {
-				this.valid = false;
-			} else {
+			if(!this.check.contains(Player.enemy(this.toMove))) {
 				this.valid = true;
+			} else {
+				this.valid = false;
 			}
 			return this;
 		},
 		recursiveValid: function () {
 			this.updateValid();
 			if (this.valid) {
-				if (this.history.moves[this.history.moves.length - 1]) {
-					var move = this.history.moves[this.history.moves.length - 1].copy(this.history.boards[this.history.boards.length - 1]);
+				if (this.pastMoves[this.pastMoves.length - 1]) {
+					var move = this.pastMoves[this.pastMoves.length - 1];
 					this.valid = Boolean(move.valid());
 				} else {
 					this.valid = true;
@@ -295,8 +291,8 @@ var	//Functions
 			var positions = {};
 			positions[JSON.stringify(this.toHistory())] = 1;
 			if (n === 1) return true;
-			return this.history.boards.some(function (board) {
-				var position = JSON.stringify(board);
+			return this.pastMoves.some(function (move) {
+				var position = JSON.stringify(move.board.toHistory());
 				if (!positions[position]) {
 					positions[position] = 1;
 				} else {
@@ -366,19 +362,10 @@ var	//Functions
 					for (var k = Object.keys(ranks).sort(), i = 0, c = k.length; i < c; ++i) {
 						copy[key][k[i]] = ranks[k[i]].copy(copy);
 					}
-				} else if (key === 'history') {
-					copy.history = {
-						boards: [],
-						moves: []
-					};
-					self.history.boards.forEach(function (board, index) {
-						copy.history.boards[index] = board.copy();
-						delete history.history;
-						delete history.halfmoves;
-						delete history.outcome;
-					});
-					self.history.moves.forEach(function (move, index) {
-						copy.history.moves[index] = move.copy(copy.history.boards[index]);
+				} else if (key === 'pastMoves') {
+					copy.pastMoves = [];
+					self.pastMoves.forEach(function (move, index) {
+						copy.pastMoves[index] = move.copy();
 					});
 				} else {
 					copy[key] = self[key];
@@ -386,8 +373,14 @@ var	//Functions
 			});
 			return copy;
 		},
-		deserialize: function (serialized) { //fix this
+		rewind: function (n) {
+			if (this.pastMoves.length >= n) {
+				this.pastMoves[this.pastMoves.length - n].board.copy(this);
+			}
+		},
+		deserialize: function (serialized) {
 			var deserialized = inst(Board),
+				historyChain = [],
 				deepCopy = function (obj, copy) {
 					Object.keys(obj).forEach(function (k) {
 						if (typeof obj[k] === 'object') {
@@ -398,27 +391,54 @@ var	//Functions
 						}
 					});
 					return copy;
+				},
+				constructMove = function (move, board, index) {
+					var constructedBoard = Board.copy.call(board),
+						constructedMove;
+					constructedBoard.pastMoves = [];
+					historyChain.forEach(function (historyMove, index) {
+						constructedBoard.pastMoves[index] = historyMove.copy();
+					});
+					constructedMove = Move.deserialize(move, constructedBoard, index % 2 ? 'b': 'w');
+					historyChain.push(constructedMove);
+					return constructedMove;
 				};
 			deepCopy(serialized, deserialized);
 			Board.forEach.call(serialized, function (piece, file, rank) {
 				deserialized[file][rank] = Piece.deserialize(piece, deserialized, file, rank);
 			});
-			deserialized.history.moves.forEach(function (move, index) {
-				deserialized.history.moves[index] = Move.deserialize(move, deserialized, index % 2 ? 'b': 'w');
+			deserialized.pastBoards.forEach(function (board, index) {
+				Board.forEach.call(board, function (piece, file, rank) {
+					board[file][rank] = Piece.deserialize(piece, board, file, rank);
+				});
 			});
+			deserialized.pastMoves.forEach(function (move, index) {
+				deserialized.pastMoves[index] = constructMove(move, deserialized.pastBoards[index], index);
+			});
+			delete deserialized.pastBoards;
 			return deserialized;
 		},
 		toHistory: function () {
 			var history = this.copy();
-			delete history.history;
+			delete history.pastMoves;
 			delete history.halfmoves;
 			delete history.outcome;
 			return history;
 		},
 		toJSON: function () {
 			var copy = this.copy();
-			copy.history.moves.forEach(function (move, index) {
-				copy.history.moves[index] = move.longAlgebraic();
+			if (copy.pastMoves) {
+				copy.pastBoards = [];
+				copy.pastMoves.forEach(function (move, index) {
+					copy.pastMoves[index] = move.longAlgebraic();
+					copy.pastBoards[index] = move.board.toHistory();
+					copy.pastBoards[index].halfmoves = move.board.halfmoves;
+					copy.pastBoards[index].outcome = move.board.outcome;
+				});
+			}
+			copy.pastBoards.forEach(function (board) {
+				delete board.pastMoves;
+				console.log('no pastMoves', board);
 			});
 			return copy;
 		},
@@ -431,7 +451,7 @@ var	//Functions
 			f: {},
 			g: {},
 			h: {},
-			history: {boards: [], moves: []},
+			pastMoves: [],
 			halfmoves: 0,
 			check: '', //'', 'w', 'b'
 			mate: false, //false, true, (!check && mate === stalemate)
@@ -449,7 +469,8 @@ var	//Functions
 			f: {1: 'bw', 2: 'pw', 7: 'pb', 8: 'bb'},
 			g: {1: 'nw', 2: 'pw', 7: 'pb', 8: 'nb'},
 			h: {1: 'rw', 2: 'pw', 7: 'pb', 8: 'rb'},
-			history: {boards: [], moves: []},
+			pastMoves: [],
+			pastBoards: [],
 			halfmoves: 0,
 			check: '',
 			mate: false,

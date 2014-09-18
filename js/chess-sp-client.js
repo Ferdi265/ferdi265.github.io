@@ -41,6 +41,7 @@ var transpose = function (rows) {
 	display = function (board) {
 		var rankNr = 8,
 			selected,
+			pieceHandler,
 			html = '<table><tbody>' + transpose(to2dArray(board)).reduceRight(function (html, rank) {
 			return html + '<tr><td>' + (rankNr--) + '</td>' + rank.map(function (piece, file) {
 				return '<td class="piece" data-rank="' + (rankNr + 1) + '" data-file="' + board.file(file + 1) + '">' + (piece ? figurines[piece.player][piece.type] : '&nbsp;') + '</td>';
@@ -65,7 +66,13 @@ var transpose = function (rows) {
 		if (!board.valid) {
 			$('.ch-container').append('<div><span>Invalid position</span></div>');
 		}
-		$('.piece').on('click', function () {
+		$('.ch-container').append($('<input type="button" value="Rewind">').click(function () {
+			board.rewind(1);
+			setTimeout(function () {
+				display(board);
+			}, 0);
+		}));
+		pieceHandler = function () {
 			var $el = $(this);
 			if (selected) {
 				if ($el.data('file') === selected.file && $el.data('rank') === selected.rank) {
@@ -80,10 +87,45 @@ var transpose = function (rows) {
 					if (move) {
 						var copy = move.valid();
 						if (copy && copy.recursiveValid().valid) {
-							move.execute();
-							setTimeout(function () {
-								display(board);
-							}, 0);
+							var execute = function () {
+									move.execute();
+									setTimeout(function () {
+										display(board);
+									}, 0);
+								},
+								$promoteForm;
+							if (move.type === 'p') {
+								$('.piece').off();
+								$promoteForm = $('<div></div>').append($('<ul></ul>')
+									.append('<li><input type="radio" name="promote" value="q" id="promote-q" checked><label for="promote-q">Queen</label></li>')
+									.append('<li><input type="radio" name="promote" value="r" id="promote-r"><label for="promote-r">Rook</label></li>')
+									.append('<li><input type="radio" name="promote" value="b" id="promote-b"><label for="promote-b">Bishop</label></li>')
+									.append('<li><input type="radio" name="promote" value="n" id="promote-n"><label for="promote-n">Knight</label></li>')
+								).append(
+									$('<input type="button" value="Move">').click(function () {
+										move.meta = $('input[name="promote"]:checked').val();
+										var copy = move.valid();
+										if (copy && copy.recursiveValid().valid) {
+											execute();
+										} else {
+											$el.removeClass('moveable');
+											$el.addClass('error');
+											$promoteForm.remove();
+											$('.piece').on('click', moveHandler);
+										}
+									})
+								).append(
+									$('<input type="button" value="Cancel">').click(function () {
+										move.meta = $('input[name="promote"]:checked').val();
+										setTimeout(function () {
+											display(board);
+										}, 0);
+									})
+								);
+								$('.ch-container').append($promoteForm);
+							} else {
+								execute();
+							}
 						} else {
 							$el.removeClass('moveable');
 							$el.addClass('error');
@@ -99,7 +141,9 @@ var transpose = function (rows) {
 					});
 				}
 			}
-		});
+		};
+		$('.piece').on('click', pieceHandler);
+		
 	},
 	figurines = {
 		w: {

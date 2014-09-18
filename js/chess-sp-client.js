@@ -66,12 +66,14 @@ var transpose = function (rows) {
 		if (!board.valid) {
 			$('.ch-container').append('<div><span>Invalid position</span></div>');
 		}
-		$('.ch-container').append($('<input type="button" value="Rewind">').click(function () {
-			board.rewind(1);
-			setTimeout(function () {
-				display(board);
-			}, 0);
-		}));
+		if (board.pastMoves.length > 0) {
+			$('.ch-container').append($('<input type="button" value="Rewind">').click(function () {
+				board.rewind(1);
+				setTimeout(function () {
+					display(board);
+				}, 0);
+			}));
+		}
 		pieceHandler = function () {
 			var $el = $(this);
 			if (selected) {

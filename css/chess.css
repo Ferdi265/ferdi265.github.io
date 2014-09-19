@@ -15,10 +15,16 @@
 	text-align: center;
 }
 .ch-container .selected {
-	background-color: #777;
+	background-color: #dd0 !important;
 }
 .ch-container .moveable {
-	background-color: #aaa;
+	background-color: #0a0 !important;
+}
+.ch-container tr:nth-last-child(2n+2) td:nth-child(2n+2) {
+    background-color: #666
+}
+.ch-container tr:nth-last-child(2n+3) td:nth-child(2n+3) {
+    background-color: #666
 }
 .ch-container .error {
 	background-color: #a00;

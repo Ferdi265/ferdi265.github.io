@@ -140,7 +140,7 @@ var transpose = function (rows) {
 					selected = board[$el.data('file')][$el.data('rank')];
 					$el.addClass('selected');
 					selected.moves().forEach(function (move) {
-						$('.piece[data-file="' + move.to.file + '"][data-rank="' + move.to.rank + '"]').addClass('moveable');
+						$('.piece[data-file="' + move.to.file + '"][data-rank="' + move.to.rank + '"]').addClass(move.valid() ? 'moveable' : 'error');
 					});
 				}
 			} else {

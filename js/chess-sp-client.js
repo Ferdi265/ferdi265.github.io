@@ -133,6 +133,15 @@ var transpose = function (rows) {
 							$el.addClass('error');
 						}
 					}
+				} else if (board[$el.data('file')][$el.data('rank')]) {
+					$('.piece').removeClass('selected');
+					$('.piece').removeClass('moveable');
+					$('.piece').removeClass('error');
+					selected = board[$el.data('file')][$el.data('rank')];
+					$el.addClass('selected');
+					selected.moves().forEach(function (move) {
+						$('.piece[data-file="' + move.to.file + '"][data-rank="' + move.to.rank + '"]').addClass('moveable');
+					});
 				}
 			} else {
 				if (board[$el.data('file')][$el.data('rank')]) {

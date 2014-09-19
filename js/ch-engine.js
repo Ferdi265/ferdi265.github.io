@@ -913,6 +913,10 @@ module.exports = {
 	},
 	stringify: function (board) {
 		return JSON.stringify(board);
-	}
+	},
+	Board: Board,
+	Move: Move,
+	Piece: Piece,
+	Player: Player
 };
 chess = module.exports; //browser compatibility

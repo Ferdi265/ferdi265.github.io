@@ -20,12 +20,12 @@
 .ch-container .moveable {
 	background-color: #0a0 !important;
 }
+.ch-container .error {
+	background-color: #a00 !important;
+}
 .ch-container tr:nth-last-child(2n+2) td:nth-child(2n+2) {
     background-color: #666
 }
 .ch-container tr:nth-last-child(2n+3) td:nth-child(2n+3) {
     background-color: #666
-}
-.ch-container .error {
-	background-color: #a00;
 }

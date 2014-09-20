@@ -17,9 +17,9 @@ So, you have been warned. Here's the demo:
 
 # Styling
 
-- Invalid moves turn red when clicked (e.g. not protect king in check)
-- Selected piece has a grey background
-- Possible moves have a light gray background
+- Selected piece has a yellow background
+- Possible moves have a green background
+- Invalid moves have a red background
 
 <div class="ch-container">
 	<script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>

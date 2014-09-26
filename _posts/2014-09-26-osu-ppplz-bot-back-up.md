@@ -12,16 +12,16 @@ I also thought that this would be a good place to host the docs :D
 
 ### Gamemode names
 
-These are the gamemode names recognized by my bot:
+These are the gamemode names recognized by my bot (case insensitive):
 
-* `osu` and `osu`
-* `Taiko` and `taiko`
-* `CtB` and `ctb`
+* `osu`
+* `taiko`
+* `ctb`
 * `osu!mania` and `osumania`
 
 ### Bot commands
 
-All private messages to [**theFerdi265**](https://osu.ppy.sh/u/theFerdi265) that begin with a "!" are handled as commands. Here is a list of valid commands:
+All private messages to [**theFerdi265**](https://osu.ppy.sh/u/theFerdi265) that begin with a "!" are handled as commands. Here is a list of valid commands (case insensitive):
 
 #### **!ppplz** or **!pp**
 

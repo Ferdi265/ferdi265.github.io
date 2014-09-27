@@ -14,7 +14,7 @@ I also thought that this would be a good place to host the docs :D
 
 These are the gamemode names recognized by my bot (case insensitive):
 
-* `osu`
+* `osu!` and `osu`
 * `taiko`
 * `ctb`
 * `osu!mania` and `osumania`

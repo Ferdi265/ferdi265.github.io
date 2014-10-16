@@ -10,4 +10,6 @@ I'm Ferdinand "Ferdi265" Bachmann, and I really like programming, especially nod
 
 I just need somewhere to dump all the completely irrelevant details of all my current projects that pobably noone will ever really use. I also want to have somewhere to actually show off my completed projects.
 
+```js
 process.exit(0);
+```

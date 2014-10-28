@@ -11,9 +11,6 @@ Getting a complete Ubuntu install going with all required packages, all my confi
 
 But I got it working and should be able to get the bot up sometime tomorrow. :D
 
-
-asdf
-
 ```
 sudo apt-get install linux-awesomeness
 ```

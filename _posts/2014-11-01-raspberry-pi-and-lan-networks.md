@@ -28,13 +28,13 @@ After I finally got the Raspbian image onto my SD I put it in the pi, plugged it
 
 The first thing I did after plugging in the pi was check my router network list via the ```http://10.0.0.138``` web interface. I wasn't intelligent enough to do ```nmap -sP 10.0.0.0/24``` yet, but it was something.
 
-Okay, the router said my raspi was 10.0.0.3, so I ssh'ed to 10.0.0.3 only to get this little message here:
+Okay, the router said my raspi was ```10.0.0.3```, so I ssh'ed to ```10.0.0.3``` only to get this little message here:
 
 ```
-ssh: connect to host 10.0.0.13 port 22: No route to host
+ssh: connect to host 10.0.0.3 port 22: No route to host
 ```
 
-After sitting there for ten minutes without finding a solution I bypassed the problem by setting up a port forward from external:23 to raspberrypi:22 and connected to it via ```ssh -p 23 $(external-ip)``` and it worked. *(at least for a while)*
+After sitting there for ten minutes without finding a solution I bypassed the problem by setting up a port forward from ```external:23``` to ```raspberrypi:22``` and connected to it via ```ssh -p 23 $(external-ip)``` and it worked. *(at least for a while)*
 
 But when I tried to set up a samba network share on the pi things started getting weird:
 
@@ -43,7 +43,7 @@ But when I tried to set up a samba network share on the pi things started gettin
 - both could ping my sister's laptop
 - my sister's laptop couldn't ping either of them
 
-In the end it got somewhat better after I changed my PC and pi to use DHCP instead of the static adresses 10.0.0.1 and 10.0.0.3. *(the router somehow didn't tell the other hosts on the LAN that they existed, event though they were shown in the network host list)*
+In the end it got somewhat better after I changed my PC and pi to use DHCP instead of the static adresses ```10.0.0.1``` and ```10.0.0.3```. *(the router somehow didn't tell the other hosts on the LAN that they existed, event though they were shown in the network host list)*
 
 - my PC (running Ubuntu) couldn't ping/connect to the pi
 - my pi couldn't ping/connect to the PC

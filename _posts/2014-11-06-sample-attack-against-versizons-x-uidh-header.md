@@ -11,7 +11,7 @@ I recently re-read Cory Doctorow's novel ["Little Brother"](http://en.wikipedia.
 
 ##X-UIDH - The Facts
 
-###What do we know about the X-UIDH tracking header?
+###What is the X-UIDH tracking header?
 
 - It is inserted into every HTTP (not HTTPS) request made over a Verizon connection
 - It is stored in a HTTP header field called "X-UIDH"

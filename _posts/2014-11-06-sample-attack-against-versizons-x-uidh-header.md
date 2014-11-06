@@ -21,16 +21,17 @@ I recently re-read Cory Doctorow's novel ["Little Brother"](http://en.wikipedia.
 ###How is it used?
 
 - Websites can read the X-UIDH header and use that to uniquely identify visitors from Verizon
-- Ad Websites can gather information about Verizon users and send ads that are selected for the user even when using features like the "pivate mode" in modern browsers
+- Ad Websites can gather information about Verizon users and send targeted ads even when using features like the "pivate mode" in modern browsers
 - Verizon can make money by selling information about X-UIDH tracked users to ad companies
+- In short: your unencrypted traffic can be easily tracked
 
 ##The attack in the novel
 
 In "Little Brother", M1k3y and his fellow X-Netters (X-Net: a Internet subnetwork accessed by X-Boxes running Linux) find out that Homeland Security had started to put RFID-Chips into almost everything. From Car Fast Passes for the Highways to Library books and Underground tickets. To track everybody, Homeland Security also set up RFID Readers at almost every second corner.
 
-So the X-Net users started to Re-flash the RFID-Chips in order to make the tracking useless.
+So the X-Net users started to regularly Re-flash RFID-Chips with IDs from other people in order to make the tracking records useless.
 
-The Result: Complete Chaos in the tracking records.
+The Result: Complete Chaos in the tracking records. (e.g. someone uses the underground somewhere in the south and a minute later, that same ID was detected by some Fast Pass reader miles away in the north)
 
 ##The attack in real life
 

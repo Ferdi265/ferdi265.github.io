@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Raspberry Pi outages"
-date:   2014-11-01 23:23:23
+date:   2014-11-16 23:23:23
 categories: raspberry pi raspberrypi linux raspbian ssh LAN network
 ---
 

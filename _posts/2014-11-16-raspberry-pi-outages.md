@@ -17,6 +17,11 @@ Result 1: the pi booted, registered an IP from DHCP, and didn't respond to pings
 
 Step 2: Check out what the hell is wrong with my Raspbian image
 
-Result 2: TBA
+Result 2: The boot partition had the dirty bit set.
 
-I hope I can get this thing working again T_T
+Solution: fsck the thing, boot it up again and uninstalled sane. Stuff works now :D
+
+~~I hope I can get this thing working again T_T~~
+
+Running again :D
+

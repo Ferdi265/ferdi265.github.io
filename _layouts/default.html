@@ -11,9 +11,11 @@
       <div class="wrapper">
         {{ content }}
       </div>
+      <div class="disqus wrapper">
+        {% include disqus.html %}
+      </div>
     </div>
 
-	{% include disqus.html %}
 	{% include footer.html %}
 
   </body>

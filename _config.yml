@@ -7,6 +7,7 @@ baseurl: ""
 url: "http://ferdi265.github.io"
 twitter_username: theFerdi265
 github_username:  Ferdi265
+disqusid: 3372890
 
 # Markdown settings
 markdown: redcarpet

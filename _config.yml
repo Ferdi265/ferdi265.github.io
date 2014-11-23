@@ -1,7 +1,7 @@
 # Site settings
 title: ferdi265.blog()
 email: theferdi265@gmail.com
-permalink: pretty
+permalink: /:year-:month-:day/:title
 description: >
   I'm Ferdinand "Ferdi265" Bachmann and this is my DevBlog where I post about my recent programming projects.
 baseurl: ""

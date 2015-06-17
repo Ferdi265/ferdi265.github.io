@@ -22,7 +22,7 @@ So, you have been warned. Here's the demo:
 - Invalid moves have a red background
 
 <div class="ch-container">
-	<script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+	<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 	<script src="/js/ch-engine.js"></script>
 	<script src="/js/chess-sp-client.js"></script>
 </div>

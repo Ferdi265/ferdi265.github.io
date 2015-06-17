@@ -21,7 +21,7 @@ But I did it, so here's the demo:
 		<li><input type="checkbox" id="axisIndicators" checked><label for="axisIndicators">Enable axis indicators</label></li>
 	</ul>
 </div>
-<script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 <script src="/js/three.min.js"></script>
 <script src="/js/ThreeCSG.js"></script>
 <script src="/js/dg-lines.js"></script>
